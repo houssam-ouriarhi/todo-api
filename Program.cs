@@ -1,3 +1,6 @@
+using MyApi.Models;
+using MyApi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add services to the container.
+builder.Services.Configure<TodoDatabaseSettings>(
+    builder.Configuration.GetSection("TodoDatabase"));
+
+// Declare service classes
+builder.Services.AddSingleton<TodoTaskService>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>

@@ -1,8 +1,13 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace MyApi;
 
-public class Todo
+public class TodoTask
 {
-    public uint? Id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
 
     public string? Label { get; set; }
 
